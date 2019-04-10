@@ -258,19 +258,35 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get from localStrage.
             const savedData = localStorage.getItem(code);
             console.log(savedData);
+
+            resultArea.innerHTML = "" + code;
             // TODO
             // check if scanning result is saved.
             if (savedData === null) {
                 // save function
+                resultArea.innerHTML += " -> <button onclick='editCodeInfo(" + code + ", null);'>edit to save</button>";
             } else {
                 // display data
             }
             // TODO
             // implement feature save to localstorage.
-            resultArea.innerHTML = "" + code + " -> <button>save</button>";
+            
         }
     });
 }, false);
+
+// edit commit data
+function editCodeInfo(code, params) {
+    const editArea = document.getElementById("editArea");
+    editArea.innerHTML = `
+        name: ---,
+        num: ---,
+        desc: ---
+    `
+        
+    console.log(code, params);
+}
+
 
 function startVideo() {
     // disable other button
