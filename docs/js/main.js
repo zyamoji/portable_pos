@@ -255,7 +255,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (App.count >= 3) {
             const resultArea = document.getElementById('resultArea');
-            resultArea.innerText = code;
+            // TODO
+            // check if scanning result is saved.
+            if (true) {
+
+            } else {
+
+            }
+            // TODO
+            // implement feature save to localstorage.
+            resultArea.innerHTML = "" + code + " -> <button>save</button>";
         }
     });
 }, false);
