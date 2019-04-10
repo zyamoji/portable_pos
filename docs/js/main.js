@@ -278,15 +278,35 @@ document.addEventListener('DOMContentLoaded', function() {
 // edit commit data
 function editCodeInfo(code, params) {
     const editArea = document.getElementById("editArea");
-    editArea.innerHTML = `
-        name: ---,
-        num: ---,
-        desc: ---
-    `
+    editArea.innerHTML = htmlForEdit("a", "b", "xx");
+    editArea.innerHTML += saveButtonHtml('inputName', 'inputNum', 'inputDesc', code);
         
     console.log(code, params);
 }
 
+const htmlForEdit = function (name, num, desc) {
+    return `
+        name: <input type="text" value="${name}" id="inputName"> 
+        num: <input type="text" value="${num}" id="inputNum">
+        desc: <input type="text" value="${desc}" id="inputDesc">
+    `
+}
+
+const saveButtonHtml = function (name, num, desc, code) {
+    return `
+        <button id="saveToLocalStorage" onclick="setToLocalStorage('${name}', '${num}', '${desc}', '${code}');">save to db</button>
+    `
+}
+
+function setToLocalStorage(nameId, numId, descId, code) {
+    const saveData = {
+        name: document.getElementById(nameId).value,
+        num: document.getElementById(numId).value,
+        desc: document.getElementById(descId).value
+    }
+    localStorage.setItem(code, JSON.stringify(saveData));
+    console.log(saveData, code);
+}
 
 function startVideo() {
     // disable other button
