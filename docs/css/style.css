@@ -7,3 +7,7 @@
     left: 0;
     top: 0;
 }
+
+#start_btn {
+    visibility: hidden;
+}
