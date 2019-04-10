@@ -1,7 +1,7 @@
 
 let localVideo = document.getElementById('localVideo');
 let testArea = document.getElementById('testArea');
-
+let App;
 
 document.addEventListener('DOMContentLoaded', function() {
     var resultCollector = Quagga.ResultCollector.create({
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return true;
         }
     });
-    var App = {
+    App = {
         init: function() {
             var self = this;
 
@@ -273,19 +273,9 @@ function startVideo() {
     // disable other button
     start_btn.style.visibility = "hidden";
     stop_camera_btn.style.visibility = "visible";
-    localCanvas.hidden = true;
-    localVideo.hidden = false;
 
-    navigator.mediaDevices.getUserMedia(
-        {video: {facingMode: {exact: "environment"}}})
-	.then(function (stream) {
-            localStream = stream;
-            localVideo.srcObject = stream;
-        })
-        .catch(function (error) {
-            console.error('mediaDevice.getUserMedia() error:', error);
-            return;
-        });
+    // quaggaJS restart
+    App.init();
 }
 
 function stopVideo() {
@@ -293,11 +283,6 @@ function stopVideo() {
     start_btn.style.visibility = "visible";
     stop_camera_btn.style.visibility = "hidden";
 
-    for (track of localStream.getTracks()) {
-        track.stop();
-    }
-    localStream = null;
-    localVideo.pause();
-    window.URL.revokeObjectURL(localVideo.src);
-    localVideo.src='';
+    // quaggaJS stop
+    Quagga.stop();
 }
