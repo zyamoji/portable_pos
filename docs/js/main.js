@@ -255,12 +255,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (App.count >= 3) {
             const resultArea = document.getElementById('resultArea');
+            // Get from localStrage.
+            const savedData = localStorage.getItem(code);
+            console.log(savedData);
             // TODO
             // check if scanning result is saved.
-            if (true) {
-
+            if (savedData === null) {
+                // save function
             } else {
-
+                // display data
             }
             // TODO
             // implement feature save to localstorage.
