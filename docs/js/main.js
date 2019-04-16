@@ -257,16 +257,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const resultArea = document.getElementById('resultArea');
             // Get from localStrage.
             const savedData = localStorage.getItem(code);
-            console.log(savedData);
 
             resultArea.innerHTML = "" + code;
             // TODO
             // check if scanning result is saved.
             if (savedData === null) {
                 // save function
-                resultArea.innerHTML += " -> <button onclick='editCodeInfo(" + code + ", null);'>edit to save</button>";
+                resultArea.innerHTML += " -> <button onclick='editCodeInfo(" + code + ", {name: \"\", num: \"\", desc: \"\"});'>edit to save</button>";
             } else {
                 // display data
+                console.log(savedData);
+                resultArea.innerHTML += ` -> <button onclick='editCodeInfo(${code}, ${savedData});'>edit to save</button>`;
             }
             // TODO
             // implement feature save to localstorage.
@@ -278,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // edit commit data
 function editCodeInfo(code, params) {
     const editArea = document.getElementById("editArea");
-    editArea.innerHTML = htmlForEdit("a", "b", "xx");
+    editArea.innerHTML = htmlForEdit(params["name"], params["num"], params["desc"]);
     editArea.innerHTML += saveButtonHtml('inputName', 'inputNum', 'inputDesc', code);
         
     console.log(code, params);
