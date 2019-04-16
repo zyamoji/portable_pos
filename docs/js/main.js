@@ -289,9 +289,9 @@ function editCodeInfo(code, params) {
 
 const htmlForEdit = function (name, num, desc) {
     return `
-        name: <input type="text" value="${name}" id="inputName"> 
-        num: <input type="text" value="${num}" id="inputNum">
-        desc: <input type="text" value="${desc}" id="inputDesc">
+        name: <input type="text" value="${name}" id="inputName"> <br>
+        num: <input type="text" value="${num}" id="inputNum"><br>
+        desc: <input type="text" value="${desc}" id="inputDesc"><br>
     `
 }
 
