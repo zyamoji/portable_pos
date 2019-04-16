@@ -258,6 +258,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get from localStrage.
             const savedData = localStorage.getItem(code);
 
+            stopVideo();
+
             resultArea.innerHTML = "" + code;
             // TODO
             // check if scanning result is saved.
