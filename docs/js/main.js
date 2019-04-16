@@ -255,19 +255,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (App.count >= 3) {
             const resultArea = document.getElementById('resultArea');
+            // Get from localStrage.
+            const savedData = localStorage.getItem(code);
+
+            resultArea.innerHTML = "" + code;
             // TODO
             // check if scanning result is saved.
-            if (true) {
-
+            if (savedData === null) {
+                // save function
+                resultArea.innerHTML += " -> <button onclick='editCodeInfo(" + code + ", {name: \"\", num: \"\", desc: \"\"});'>edit to save</button>";
             } else {
-
+                // display data
+                console.log(savedData);
+                resultArea.innerHTML += ` -> <button onclick='editCodeInfo(${code}, ${savedData});'>edit to save</button>`;
             }
             // TODO
             // implement feature save to localstorage.
-            resultArea.innerHTML = "" + code + " -> <button>save</button>";
+            
         }
     });
 }, false);
+
+// edit commit data
+function editCodeInfo(code, params) {
+    const editArea = document.getElementById("editArea");
+    editArea.innerHTML = htmlForEdit(params["name"], params["num"], params["desc"]);
+    editArea.innerHTML += saveButtonHtml('inputName', 'inputNum', 'inputDesc', code);
+        
+    console.log(code, params);
+}
+
+const htmlForEdit = function (name, num, desc) {
+    return `
+        name: <input type="text" value="${name}" id="inputName"> 
+        num: <input type="text" value="${num}" id="inputNum">
+        desc: <input type="text" value="${desc}" id="inputDesc">
+    `
+}
+
+const saveButtonHtml = function (name, num, desc, code) {
+    return `
+        <button id="saveToLocalStorage" onclick="setToLocalStorage('${name}', '${num}', '${desc}', '${code}');">save to db</button>
+    `
+}
+
+function setToLocalStorage(nameId, numId, descId, code) {
+    const saveData = {
+        name: document.getElementById(nameId).value,
+        num: document.getElementById(numId).value,
+        desc: document.getElementById(descId).value
+    }
+    localStorage.setItem(code, JSON.stringify(saveData));
+    console.log(saveData, code);
+}
 
 function startVideo() {
     // disable other button
